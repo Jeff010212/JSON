@@ -91,16 +91,16 @@ static void test_parse_number() {
     TEST_NUMBER(-1E-10, "-1E-10");
     TEST_NUMBER(1.234E+10, "1.234E+10");
     TEST_NUMBER(1.234E-10, "1.234E-10");
-    TEST_NUMBER(0.0, "1e-10000"); /* must underflow */
+    TEST_NUMBER(0.0, "1e-10000"); //must underflow
 
-    TEST_NUMBER(1.0000000000000002, "1.0000000000000002"); /* the smallest number > 1 */
-    TEST_NUMBER( 4.9406564584124654e-324, "4.9406564584124654e-324"); /* minimum denormal */
+    TEST_NUMBER(1.0000000000000002, "1.0000000000000002"); //the smallest number > 1
+    TEST_NUMBER( 4.9406564584124654e-324, "4.9406564584124654e-324"); //minimum denormal 
     TEST_NUMBER(-4.9406564584124654e-324, "-4.9406564584124654e-324");
-    TEST_NUMBER( 2.2250738585072009e-308, "2.2250738585072009e-308");  /* Max subnormal double */
+    TEST_NUMBER( 2.2250738585072009e-308, "2.2250738585072009e-308");  //Max subnormal double
     TEST_NUMBER(-2.2250738585072009e-308, "-2.2250738585072009e-308");
-    TEST_NUMBER( 2.2250738585072014e-308, "2.2250738585072014e-308");  /* Min normal positive double */
+    TEST_NUMBER( 2.2250738585072014e-308, "2.2250738585072014e-308");  //Min normal positive double 
     TEST_NUMBER(-2.2250738585072014e-308, "-2.2250738585072014e-308");
-    TEST_NUMBER( 1.7976931348623157e+308, "1.7976931348623157e+308");  /* Max double */
+    TEST_NUMBER( 1.7976931348623157e+308, "1.7976931348623157e+308");  //Max double 
     TEST_NUMBER(-1.7976931348623157e+308, "-1.7976931348623157e+308");
 }
 
@@ -120,11 +120,11 @@ static void test_parse_string() {
     TEST_STRING("Hello\nWorld", "\"Hello\\nWorld\"");
     TEST_STRING("\" \\ / \b \f \n \r \t", "\"\\\" \\\\ \\/ \\b \\f \\n \\r \\t\"");
     TEST_STRING("Hello\0World", "\"Hello\\u0000World\"");
-    TEST_STRING("\x24", "\"\\u0024\"");         /* Dollar sign U+0024 */
-    TEST_STRING("\xC2\xA2", "\"\\u00A2\"");     /* Cents sign U+00A2 */
-    TEST_STRING("\xE2\x82\xAC", "\"\\u20AC\""); /* Euro sign U+20AC */
-    TEST_STRING("\xF0\x9D\x84\x9E", "\"\\uD834\\uDD1E\"");  /* G clef sign U+1D11E */
-    TEST_STRING("\xF0\x9D\x84\x9E", "\"\\ud834\\udd1e\"");  /* G clef sign U+1D11E */
+    TEST_STRING("\x24", "\"\\u0024\"");         //Dollar sign U+0024 
+    TEST_STRING("\xC2\xA2", "\"\\u00A2\"");     //Cents sign U+00A2 
+    TEST_STRING("\xE2\x82\xAC", "\"\\u20AC\""); //Euro sign U+20AC 
+    TEST_STRING("\xF0\x9D\x84\x9E", "\"\\uD834\\uDD1E\"");  //G clef sign U+1D11E 
+    TEST_STRING("\xF0\x9D\x84\x9E", "\"\\ud834\\udd1e\"");  //G clef sign U+1D11E 
 }
 
 static void test_parse_array() {
@@ -245,17 +245,17 @@ static void test_parse_invalid_value() {
     TEST_PARSE_ERROR(LEPT_PARSE_INVALID_VALUE, "nul");
     TEST_PARSE_ERROR(LEPT_PARSE_INVALID_VALUE, "?");
 
-    /* invalid number */
+    //invalid number
     TEST_PARSE_ERROR(LEPT_PARSE_INVALID_VALUE, "+0");
     TEST_PARSE_ERROR(LEPT_PARSE_INVALID_VALUE, "+1");
-    TEST_PARSE_ERROR(LEPT_PARSE_INVALID_VALUE, ".123"); /* at least one digit before '.' */
-    TEST_PARSE_ERROR(LEPT_PARSE_INVALID_VALUE, "1.");   /* at least one digit after '.' */
+    TEST_PARSE_ERROR(LEPT_PARSE_INVALID_VALUE, ".123"); //at least one digit before '.' 
+    TEST_PARSE_ERROR(LEPT_PARSE_INVALID_VALUE, "1.");   //at least one digit after '.' 
     TEST_PARSE_ERROR(LEPT_PARSE_INVALID_VALUE, "INF");
     TEST_PARSE_ERROR(LEPT_PARSE_INVALID_VALUE, "inf");
     TEST_PARSE_ERROR(LEPT_PARSE_INVALID_VALUE, "NAN");
     TEST_PARSE_ERROR(LEPT_PARSE_INVALID_VALUE, "nan");
 
-    /* invalid value in array */
+    //invalid value in array 
     TEST_PARSE_ERROR(LEPT_PARSE_INVALID_VALUE, "[1,]");
     TEST_PARSE_ERROR(LEPT_PARSE_INVALID_VALUE, "[\"a\", nul]");
 }
@@ -263,8 +263,8 @@ static void test_parse_invalid_value() {
 static void test_parse_root_not_singular() {
     TEST_PARSE_ERROR(LEPT_PARSE_ROOT_NOT_SINGULAR, "null x");
 
-    /* invalid number */
-    TEST_PARSE_ERROR(LEPT_PARSE_ROOT_NOT_SINGULAR, "0123"); /* after zero should be '.' or nothing */
+    //invalid number 
+    TEST_PARSE_ERROR(LEPT_PARSE_ROOT_NOT_SINGULAR, "0123"); //after zero should be '.' or nothing
     TEST_PARSE_ERROR(LEPT_PARSE_ROOT_NOT_SINGULAR, "0x0");
     TEST_PARSE_ERROR(LEPT_PARSE_ROOT_NOT_SINGULAR, "0x123");
 }
@@ -394,14 +394,14 @@ static void test_stringify_number() {
     TEST_ROUNDTRIP("1.234e+20");
     TEST_ROUNDTRIP("1.234e-20");
 
-    TEST_ROUNDTRIP("1.0000000000000002"); /* the smallest number > 1 */
-    TEST_ROUNDTRIP("4.9406564584124654e-324"); /* minimum denormal */
+    TEST_ROUNDTRIP("1.0000000000000002"); //the smallest number > 1 
+    TEST_ROUNDTRIP("4.9406564584124654e-324"); //minimum denormal 
     TEST_ROUNDTRIP("-4.9406564584124654e-324");
-    TEST_ROUNDTRIP("2.2250738585072009e-308");  /* Max subnormal double */
+    TEST_ROUNDTRIP("2.2250738585072009e-308");  //Max subnormal double 
     TEST_ROUNDTRIP("-2.2250738585072009e-308");
-    TEST_ROUNDTRIP("2.2250738585072014e-308");  /* Min normal positive double */
+    TEST_ROUNDTRIP("2.2250738585072014e-308");  //Min normal positive double 
     TEST_ROUNDTRIP("-2.2250738585072014e-308");
-    TEST_ROUNDTRIP("1.7976931348623157e+308");  /* Max double */
+    TEST_ROUNDTRIP("1.7976931348623157e+308");  //Max double 
     TEST_ROUNDTRIP("-1.7976931348623157e+308");
 }
 
@@ -590,15 +590,6 @@ static void test_access_array() {
     EXPECT_EQ_SIZE_T(6, lept_get_array_size(&a));
     for (i = 0; i < 6; i++)
         EXPECT_EQ_DOUBLE((double)i + 2, lept_get_number(lept_get_array_element(&a, i)));
-
-#if 0
-    for (i = 0; i < 2; i++) {
-        lept_init(&e);
-        lept_set_number(&e, i);
-        lept_move(lept_insert_array_element(&a, i), &e);
-        lept_free(&e);
-    }
-#endif
     
     EXPECT_EQ_SIZE_T(8, lept_get_array_size(&a));
     for (i = 0; i < 8; i++)
@@ -612,13 +603,13 @@ static void test_access_array() {
         EXPECT_EQ_DOUBLE((double)i, lept_get_number(lept_get_array_element(&a, i)));
 
     lept_set_string(&e, "Hello", 5);
-    lept_move(lept_pushback_array_element(&a), &e);     /* Test if element is freed */
+    lept_move(lept_pushback_array_element(&a), &e);     //Test if element is freed
     lept_free(&e);
 
     i = lept_get_array_capacity(&a);
     lept_clear_array(&a);
     EXPECT_EQ_SIZE_T(0, lept_get_array_size(&a));
-    EXPECT_EQ_SIZE_T(i, lept_get_array_capacity(&a));   /* capacity remains unchanged */
+    EXPECT_EQ_SIZE_T(i, lept_get_array_capacity(&a));   //capacity remains unchanged 
     lept_shrink_array(&a);
     EXPECT_EQ_SIZE_T(0, lept_get_array_capacity(&a));
 
@@ -626,8 +617,7 @@ static void test_access_array() {
 }
 
 static void test_access_object() {
-#if 0
-    lept_value o, v, *pv;
+        lept_value o, v, *pv;
     size_t i, j, index;
 
     lept_init(&o);
@@ -695,7 +685,6 @@ static void test_access_object() {
     EXPECT_EQ_SIZE_T(0, lept_get_object_capacity(&o));
 
     lept_free(&o);
-#endif
 }
 
 static void test_access() {
